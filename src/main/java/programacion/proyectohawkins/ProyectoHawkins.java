@@ -70,14 +70,25 @@ public class ProyectoHawkins {
                 valido = true;
             } catch (Exception e) {
                 System.out.println("Error"); // Completar error
-                sc.nextLine();
+                sc.nextLine(); // Limpiar buffer
             }
         }
+        System.out.println("Lectura completada.");
         return sensor;
     }
     
-    public static int evaluarNivelRiesgo(double sensorMedido, int LIMITE_RIESGO){
-        return 0;
+    public static int evaluarNivelRiesgo(double microTeslas, int LIMITE_RIESGO){
+        int codigo = 0;
+        if (microTeslas < 50) {
+            codigo = 1;
+        } else if (microTeslas >= 50 || microTeslas <= LIMITE_RIESGO) {
+            codigo = 2;
+        } else if (microTeslas > LIMITE_RIESGO) {
+            codigo = 3;
+        }
+        String nivelRiesgo = (microTeslas < 50) ? "Seguro" :  (microTeslas > LIMITE_RIESGO) ? "CRITICO" : "de Alerta";
+        System.out.println("El nivel de riesgo es " + nivelRiesgo);
+        return codigo;
     }
     
     public static int calcularPorcentajeTruncado(double sensorMedido, double MAX_ENERGIA){
