@@ -11,7 +11,7 @@ public class ProyectoHawkins {
     public static void main(String[] args) {
         //  DECLARACION DE VARIABLES
         final double MAX_ENERGIA = 200.0;
-        final int LIMITE_RIESGO = 150;
+        final double LIMITE_RIESGO = 150.0;
         String operadorActual;
         double sensorMedido;
         int codigoRiesgo;
@@ -77,7 +77,7 @@ public class ProyectoHawkins {
         return sensor;
     }
     
-    public static int evaluarNivelRiesgo(double microTeslas, int LIMITE_RIESGO){
+    public static int evaluarNivelRiesgo(double microTeslas, double LIMITE_RIESGO){
         int codigo = 0;
         if (microTeslas < 50) {
             codigo = 1;
@@ -91,17 +91,31 @@ public class ProyectoHawkins {
         return codigo;
     }
     
-    public static int calcularPorcentajeTruncado(double sensorMedido, double MAX_ENERGIA){
-        return 0;
+    public static int calcularPorcentajeTruncado(double lectura, double maxEnergia){
+        double porcentaje = (lectura / maxEnergia) * 100; // no compruebo maxEnergia porque siempre va a ser > 0
+        return (int) porcentaje;
     }
     
-    public static boolean ejecutarProtocoloAccion(int codigoRiesgo){
-        boolean ejecutar = false;
-        return ejecutar;
+    public static boolean ejecutarProtocoloAccion(int codigo){
+        switch (codigo) {
+            case 1:
+                System.out.println("Modo Estable");
+                return false;
+            case 2:
+                System.out.println("Anomalia Detectada");
+                return false;
+            case 3:
+                System.out.println("¡ALERTA MAXIMA!");
+                return true;
+            default:
+                System.out.println("Codigo no valido");
+                return false;
+        }
     }
     
-    public static void simularMuestreoContinuo(Scanner sc, int LIMITE_RIESGO){
-    
+    public static void simularMuestreoContinuo(Scanner sc, double LIMITE_RIESGO){
+        while(leerLecturaSegura(sc, "SIMULACRO      Introduce lectura μT: ") <= 0){
+        }
     }
     
 }
