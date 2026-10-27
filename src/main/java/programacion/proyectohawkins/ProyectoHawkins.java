@@ -61,7 +61,19 @@ public class ProyectoHawkins {
     }
     
     public static double leerLecturaSegura(Scanner sc, String txt){
-        return 0;
+        boolean valido = false;
+        double sensor = 0;
+        while (!valido){
+            try {
+                System.out.println(txt);
+                sensor = sc.nextDouble();
+                valido = true;
+            } catch (Exception e) {
+                System.out.println("Error"); // Completar error
+                sc.nextLine();
+            }
+        }
+        return sensor;
     }
     
     public static int evaluarNivelRiesgo(double sensorMedido, int LIMITE_RIESGO){
